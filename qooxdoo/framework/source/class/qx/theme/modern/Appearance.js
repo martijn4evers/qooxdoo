@@ -664,7 +664,7 @@ qx.Theme.define("qx.theme.modern.Appearance",
 
     "datefield/textfield" : "combobox/textfield",
 
-    "datefield/list" :
+    "datefield/datechooser" :
     {
       alias : "datechooser",
       include : "datechooser",

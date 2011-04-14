@@ -583,7 +583,7 @@ qx.Theme.define("qx.theme.classic.Appearance",
       }
     },
 
-    "datefield/list" :
+    "datefield/datechooser" :
     {
       alias : "datechooser",
       include : "datechooser",

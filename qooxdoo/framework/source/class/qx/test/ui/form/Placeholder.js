@@ -148,7 +148,8 @@ qx.Class.define("qx.test.ui.form.Placeholder",
     __syncAppearance : function(widget) {
       if (qx.Class.isSubClassOf(widget.constructor, qx.ui.form.AbstractField)) {
         widget.syncAppearance();
-      } else if (qx.Class.isSubClassOf(widget.constructor, qx.ui.form.ComboBox)) {
+      } else if (qx.Class.isSubClassOf(widget.constructor, qx.ui.form.ComboBox)
+              || qx.Class.isSubClassOf(widget.constructor, qx.ui.form.AbstractDateField)) {
         widget.getChildControl("textfield").syncAppearance();
       }
     },
@@ -156,7 +157,8 @@ qx.Class.define("qx.test.ui.form.Placeholder",
     __getVisibleValueOf: function(widget) {
       if (qx.Class.isSubClassOf(widget.constructor, qx.ui.form.AbstractField)) {
         return widget.getContentElement().getValue();
-      } else if (qx.Class.isSubClassOf(widget.constructor, qx.ui.form.ComboBox)) {
+      } else if (qx.Class.isSubClassOf(widget.constructor, qx.ui.form.ComboBox)
+              || qx.Class.isSubClassOf(widget.constructor, qx.ui.form.AbstractDateField)) {
         return widget.getChildControl("textfield").getContentElement().getValue();
       }
     },
@@ -169,13 +171,15 @@ qx.Class.define("qx.test.ui.form.Placeholder",
       if (!useQxPlaceholder) {
         if (qx.Class.isSubClassOf(widget.constructor, qx.ui.form.AbstractField)) {
           return widget.getContentElement().getAttribute("placeholder");
-        } else if (qx.Class.isSubClassOf(widget.constructor, qx.ui.form.ComboBox)) {
+        } else if (qx.Class.isSubClassOf(widget.constructor, qx.ui.form.ComboBox)
+                || qx.Class.isSubClassOf(widget.constructor, qx.ui.form.AbstractDateField)) {
           return widget.getChildControl("textfield").getContentElement().getAttribute("placeholder");
         }
       } else {
         if (qx.Class.isSubClassOf(widget.constructor, qx.ui.form.AbstractField)) {
           return widget.getContainerElement().getChildren()[1].getValue();
-        } else if (qx.Class.isSubClassOf(widget.constructor, qx.ui.form.ComboBox)) {
+        } else if (qx.Class.isSubClassOf(widget.constructor, qx.ui.form.ComboBox)
+                || qx.Class.isSubClassOf(widget.constructor, qx.ui.form.AbstractDateField)) {
           return widget.getChildControl("textfield").getContainerElement().getChildren()[1].getValue();
         }
       }
@@ -193,7 +197,8 @@ qx.Class.define("qx.test.ui.form.Placeholder",
             contentElem.getAttribute("placeholder") != "" &&
             contentElem.getAttribute("placeholder") != null &&
             !qx.ui.core.FocusHandler.getInstance().isFocused(widget);
-        } else if (qx.Class.isSubClassOf(widget.constructor, qx.ui.form.ComboBox)) {
+        } else if (qx.Class.isSubClassOf(widget.constructor, qx.ui.form.ComboBox)
+                || qx.Class.isSubClassOf(widget.constructor, qx.ui.form.AbstractDateField)) {
           var contentElem = widget.getChildControl("textfield").getContentElement();
           return widget.getChildControl("textfield").getValue() == null &&
             contentElem.getAttribute("placeholder") != "" &&
@@ -203,7 +208,8 @@ qx.Class.define("qx.test.ui.form.Placeholder",
       } else {
         if (qx.Class.isSubClassOf(widget.constructor, qx.ui.form.AbstractField)) {
           return widget.getContainerElement().getChildren()[1].getStyle("visibility") != "hidden";
-        } else if (qx.Class.isSubClassOf(widget.constructor, qx.ui.form.ComboBox)) {
+        } else if (qx.Class.isSubClassOf(widget.constructor, qx.ui.form.ComboBox)
+                || qx.Class.isSubClassOf(widget.constructor, qx.ui.form.AbstractDateField)) {
           return widget.getChildControl("textfield").getContainerElement().getChildren()[1].getStyle("visibility") != "hidden";
         }
       }
