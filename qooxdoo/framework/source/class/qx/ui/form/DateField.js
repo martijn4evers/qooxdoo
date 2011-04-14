@@ -81,6 +81,24 @@ qx.Class.define("qx.ui.form.DateField",
 
   members :
   {
+    /**
+     * Checks if the field is empty.
+     *
+     * @return {Boolean} True, if the date field is empty.
+     * @deprecated since 1.5: Please use "if (field.getValue() === null)" instead.
+     */
+    isEmpty: function()
+    {
+      if (qx.core.Environment.get("qx.debug")) {
+        qx.Bootstrap.warn(
+          "The method 'qx.ui.form.AbstractDateField.isEmpty' is deprecated: "+
+          "Please use 'if (qx.ui.form.AbstractDateField.getValue() === null)' instead.");
+      }
+      
+      return (null === this.getValue());
+    },
+
+
     // overridden
     _createChildControlImpl : function(id, hash)
     {
@@ -88,6 +106,14 @@ qx.Class.define("qx.ui.form.DateField",
 
       switch(id)
       {
+        case "list":
+          if (qx.core.Environment.get("qx.debug")) {
+            qx.Bootstrap.warn(
+              "The child control 'list' of qx.ui.form.DateField is deprecated: "+
+              "Please use the 'datechooser' child control instead.");
+          }
+          // omit break statement
+
         case "datechooser":
           control = new qx.ui.control.DateChooser();
           control.set({focusable: false, keepFocus: true});
