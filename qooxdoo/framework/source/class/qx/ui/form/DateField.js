@@ -56,6 +56,20 @@ qx.Class.define("qx.ui.form.DateField",
   },
 
 
+
+  /*
+  *****************************************************************************
+     STATIC MEMBERS
+  *****************************************************************************
+  */
+
+  statics :
+  {
+    __dateFormat : null,
+    __formatter : null
+  },
+
+
   /*
   *****************************************************************************
      PROPERTIES
@@ -96,6 +110,27 @@ qx.Class.define("qx.ui.form.DateField",
       }
       
       return (null === this.getValue());
+    },
+
+
+    // overridden
+    _getDefaultDateFormatter : function()
+    {
+      var format = qx.locale.Date.getDateFormat("medium").toString();
+      var self = this.self(arguments);
+
+      if (format == self.__dateFormat) {
+        return self.__formatter;
+      }
+
+      if (self.__formatter) {
+        self.__formatter.dispose();
+      }
+
+      self.__formatter = new qx.util.format.DateFormat(format, qx.locale.Manager.getInstance().getLocale());
+      self.__dateFormat = format;
+
+      return self.__formatter;
     },
 
 

@@ -76,43 +76,11 @@ qx.Class.define("qx.ui.form.AbstractDateField",
 
     // set default date
     this.initDateFormat(this._getDefaultDateFormatter());
-  },
 
-
-
-
-  /*
-  *****************************************************************************
-     STATIC MEMBERS
-  *****************************************************************************
-  */
-
-  statics :
-  {
-    __dateFormat : null,
-    __formatter : null,
-
-    /**
-     * Get the shared default date formatter
-     *
-     * @return {qx.util.format.DateFormat} The shared date formatter
-     */
-    getDefaultDateFormatter : function()
-    {
-      var format = qx.locale.Date.getDateFormat("medium").toString();
-
-      if (format == this.__dateFormat) {
-        return this.__formatter;
-      }
-
-      if (this.__formatter) {
-        this.__formatter.dispose();
-      }
-
-      this.__formatter = new qx.util.format.DateFormat(format, qx.locale.Manager.getInstance().getLocale());
-      this.__dateFormat = format;
-
-      return this.__formatter;
+    // listen for locale changes
+    if (qx.core.Environment.get("qx.dynlocale")) {
+      this.__removeLocaleDateFormatListener = true;
+      qx.locale.Manager.getInstance().addListener("changeLocale", this.__onChangeLocale2, this);
     }
   },
 
@@ -167,6 +135,7 @@ qx.Class.define("qx.ui.form.AbstractDateField",
     /** The formatter, which converts the selected date to a string. **/
     dateFormat :
     {
+      nullable : false,
       deferredInit : true,
       check : "qx.util.format.DateFormat",
       apply : "_applyDateFormat"
@@ -182,6 +151,8 @@ qx.Class.define("qx.ui.form.AbstractDateField",
 
   members :
   {
+    __removeLocaleDateFormatListener : null,
+
     // overridden
     _createChildControlImpl : function(id, hash)
     {
@@ -231,7 +202,7 @@ qx.Class.define("qx.ui.form.AbstractDateField",
      * @return {qx.util.format.DateFormat}
      */
     _getDefaultDateFormatter : function() {
-      return this.self(arguments).getDefaultDateFormatter();
+      return new qx.util.format.DateFormat();
     },
 
 
@@ -249,17 +220,12 @@ qx.Class.define("qx.ui.form.AbstractDateField",
         return;
       }
 
-      // get the date with the old date format
-      try
-      {
-        var textfield = this.getChildControl("textfield");
-        var dateStr = textfield.getValue();
-        var currentDate = old.parse(dateStr);
-        textfield.setValue(value.format(currentDate));
+      if (this.__removeLocaleDateFormatListener) {
+        qx.locale.Manager.getInstance().removeListener("changeLocale", this.__onChangeLocale2, this);
+        this.__removeLocaleDateFormatListener = null;
       }
-      catch (ex) {
-        // do nothing if the former date could not be parsed
-      }
+
+      this.getChildControl("textfield").setValue(value.format(this.getValue()));
     },
 
 
@@ -390,6 +356,14 @@ qx.Class.define("qx.ui.form.AbstractDateField",
       PRIVATE EVENT LISTENERS
     ---------------------------------------------------------------------------
     */
+
+
+    __onChangeLocale2 : function()
+    {
+      this.__removeLocaleDateFormatListener = false;
+      this.setDateFormat(this._getDefaultDateFormatter());
+      this.__removeLocaleDateFormatListener = true;
+    },
 
 
     /**
