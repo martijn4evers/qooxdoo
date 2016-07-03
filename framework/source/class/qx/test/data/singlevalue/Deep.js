@@ -345,6 +345,9 @@ qx.Class.define("qx.test.data.singlevalue.Deep",
 
       this.__b1.setName("B1");
       this.assertEquals("B1", this.__label.getValue(), "Deep binding does not work.");
+
+      this.__b1.setChild(null);
+      this.assertNull(this.__label.getValue(), "Deep binding does not work.");
     },
 
 

@@ -286,8 +286,7 @@ qx.Class.define("qx.ui.form.validation.Manager",
           validatorResult = (formItem.getSelection().getLength() > 0);
 
         } else {
-          var value = formItem.getValue();
-          validatorResult = !!value || value === 0;
+          validatorResult = !!formItem.getValue();
         }
         formItem.setValid(validatorResult);
         var individualMessage = formItem.getRequiredInvalidMessage();

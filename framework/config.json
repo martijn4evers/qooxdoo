@@ -211,6 +211,10 @@
         "LOCALES" : ["de", "de_DE", "en", "en_GB", "en_US"],
         "TEST_EXCLUDE" : "${TEST_PERFORMANCE_INCLUDE}",
         "TEST_INCLUDE" : "qx.*"
+      },
+      "environment" :
+      {
+        "qx.debug.dispose" : true
       }
     },
 

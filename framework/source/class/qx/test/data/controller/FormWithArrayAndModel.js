@@ -246,6 +246,36 @@ qx.Class.define("qx.test.data.controller.FormWithArrayAndModel",
 
       ctrl.dispose();
       addressForm.dispose();
+    },
+
+
+    "test custom mapping" : function() {
+      var addressForm = this.__makeAddressForm();
+      this.__modelField.setTarget(addressForm);
+      var ctrl = new qx.data.controller.Form();
+
+      // path in form   : path in model
+      ctrl.setCustomMapping({
+        "f2.streetName" : "f3",
+        "f2"            : "f1",
+        "f1[last]"      : "f2"
+      });
+
+      ctrl.set({model: this.__model, target: this.__form});
+      this.assertNull(this.__arrayField.getValue());
+      this.assertNull(this.__modelField.getValue());
+
+      // let's make an address for this user (this.__model being a user now ;) )
+      this.__modelField.createModel(false);
+      addressForm.getItem("houseNr").setValue("44");
+      addressForm.getItem("streetName").setValue("Neighbor Ln");
+
+      // imagine f2 now being a user address
+      this.assertIdentical("44", this.__model.getF2().getHouseNr());
+      this.assertIdentical("Neighbor Ln", this.__model.getF2().getStreetName());
+
+      ctrl.dispose();
+      addressForm.dispose();
     }
   }
 });

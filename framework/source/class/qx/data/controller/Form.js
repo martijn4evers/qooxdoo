@@ -63,6 +63,7 @@ qx.Class.define("qx.data.controller.Form",
 
     this._selfUpdate = !!selfUpdate;
     this.__bindingOptions = {};
+    this.__propertyMapping = {};
 
     if (model != null) {
       this.setModel(model);
@@ -96,6 +97,25 @@ qx.Class.define("qx.data.controller.Form",
       nullable: true,
       init: null,
       dereference: true
+    },
+
+
+    customMapping :
+    {
+      init : null,
+      nullable : true,
+      apply : "_applyCustomMapping",
+      check : function(value) {
+        if ('object' === typeof value && null !== value) {
+          for (var prop in value) {
+            if ('string' !== typeof value[prop]) {
+              return false;
+            }
+          }
+        }
+
+        return true;
+      }
     }
   },
 
@@ -287,6 +307,14 @@ qx.Class.define("qx.data.controller.Form",
       // model and target are available
       if (value != null) {
         this.__setUpBinding();
+      }
+    },
+
+
+    // apply method
+    _applyCustomMapping : function(mapping) {
+      if (this.getModel() !== null && this.getTarget() !== null) {
+        this.error("Can not set mapping while binding is in place. No custom mapping configured!");
       }
     },
 
