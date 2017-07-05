@@ -19,6 +19,14 @@
 ************************************************************************ */
 
 /**
+ * Custom type definitions for JSDoc.
+ *
+ * @typedef * var
+ * @typedef Object.<String, *> Map
+ * @typedef Arguments arguments
+ */
+
+/**
  * Create namespace
  *
  * @ignore(qx.data)

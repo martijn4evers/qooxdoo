@@ -56,7 +56,7 @@ qx.Mixin.define("qx.core.MAssert",
      *
      * @param value {Boolean} Condition to check for. Must be identical to
      *    <code>true</code>.
-     * @param msg {String} Message to be shown if the assertion fails.
+     * @param msg {String?} Message to be shown if the assertion fails.
      */
     assertTrue : function(value, msg) {
       qx.core.Assert.assertTrue(value, msg);
@@ -68,7 +68,7 @@ qx.Mixin.define("qx.core.MAssert",
      *
      * @param value {Boolean} Condition to check for. Must be identical to
      *    <code>false</code>.
-     * @param msg {String} Message to be shown if the assertion fails.
+     * @param msg {String?} Message to be shown if the assertion fails.
      */
     assertFalse : function(value, msg) {
       qx.core.Assert.assertFalse(value, msg);
@@ -105,7 +105,7 @@ qx.Mixin.define("qx.core.MAssert",
      *
      * @param expected {var} Reference value
      * @param found {var} found value
-     * @param msg {String} Message to be shown if the assertion fails.
+     * @param msg {String?} Message to be shown if the assertion fails.
      */
     assertIdentical : function(expected, found, msg) {
       qx.core.Assert.assertIdentical(expected, found, msg);

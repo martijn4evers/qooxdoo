@@ -18,6 +18,10 @@
 ************************************************************************ */
 
 /**
+ * @typedef {{left: int, top: int, width: int, height: int}} Bounds
+ */
+
+/**
  * The base class of all items, which should be laid out using a layout manager
  * {@link qx.ui.layout.Abstract}.
  */
@@ -371,7 +375,7 @@ qx.Class.define("qx.ui.core.LayoutItem",
     /** @type {Integer} The computed height */
     __computedHeightForWidth : null,
 
-    /** @type {Map} The computed size of the layout item */
+    /** @type {Bounds|null} The computed size of the layout item */
     __computedLayout : null,
 
     /** @type {Boolean} Whether the current layout is valid */
@@ -383,7 +387,7 @@ qx.Class.define("qx.ui.core.LayoutItem",
     /** @type {Boolean} Whether the margins have changed and must be updated */
     __updateMargin : null,
 
-    /** @type {Map} user provided bounds of the widget, which override the layout manager */
+    /** @type {Bounds|null} user provided bounds of the widget, which override the layout manager */
     __userBounds : null,
 
     /** @type {Map} The item's layout properties */
@@ -394,10 +398,7 @@ qx.Class.define("qx.ui.core.LayoutItem",
      * Get the computed location and dimension as computed by
      * the layout manager.
      *
-     * @return {Map} The location and dimensions in pixel
-     *    (if the layout is valid). Contains the keys
-     *    <code>width</code>, <code>height</code>, <code>left</code> and
-     *    <code>top</code>.
+     * @return Bounds|null
      */
     getBounds : function() {
       return this.__userBounds || this.__computedLayout || null;
