@@ -59,6 +59,7 @@ qx.Class.define("qx.ui.form.Slider",
   extend : qx.ui.core.Widget,
   implement : [
     qx.ui.form.IForm,
+    qx.ui.form.IField,
     qx.ui.form.INumberForm,
     qx.ui.form.IRange
   ],

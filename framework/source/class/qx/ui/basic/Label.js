@@ -61,7 +61,7 @@
 qx.Class.define("qx.ui.basic.Label",
 {
   extend : qx.ui.core.Widget,
-  implement : [qx.ui.form.IStringForm],
+  implement : [ qx.ui.form.IStringForm, qx.ui.form.IField ],
 
 
 

@@ -34,6 +34,7 @@ qx.Class.define("qx.ui.form.RadioButtonGroup",
   include : [qx.ui.core.MLayoutHandling, qx.ui.form.MModelSelection],
   implement : [
     qx.ui.form.IForm,
+    qx.ui.form.IField,
     qx.ui.core.ISingleSelection,
     qx.ui.form.IModelSelection
   ],
@@ -59,6 +60,7 @@ qx.Class.define("qx.ui.form.RadioButtonGroup",
 
     // attach the listener
     this.__radioGroup.addListener("changeSelection", function(e) {
+      this.fireDataEvent("changeValue", e.getData(), e.getOldData());
       this.fireDataEvent("changeSelection", e.getData(), e.getOldData());
     }, this);
   },
@@ -111,6 +113,9 @@ qx.Class.define("qx.ui.form.RadioButtonGroup",
 
   events :
   {
+    /** Fires after the value was modified */
+    "changeValue" : "qx.event.type.Data",
+
     /**
      * Fires after the selection was modified
      */
@@ -287,6 +292,33 @@ qx.Class.define("qx.ui.form.RadioButtonGroup",
      */
     getSelectables: function(all) {
       return this.__radioGroup.getSelectables(all);
+    },
+
+
+    /**
+     * Set given radio item as checked.
+     *
+     * @param item {null|qx.ui.form.IRadioItem} Item to set as selected value.
+     * @returns {null|TypeError} The status of this operation.
+     */
+    setValue : function(item) {
+      return this.__radioGroup.setValue(item);
+    },
+
+
+    /**
+     * @returns {null|qx.ui.form.IRadioItem} The checked radio item or null if there is none.
+     */
+    getValue : function() {
+      return this.__radioGroup.getValue();
+    },
+
+
+    /**
+     * Reset radio item selection.
+     */
+    resetValue : function() {
+      this.__radioGroup.resetValue();
     }
   },
 

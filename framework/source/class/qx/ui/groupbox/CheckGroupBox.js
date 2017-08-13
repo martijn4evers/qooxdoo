@@ -27,7 +27,7 @@
 qx.Class.define("qx.ui.groupbox.CheckGroupBox",
 {
   extend : qx.ui.groupbox.GroupBox,
-  implement : [qx.ui.form.IExecutable, qx.ui.form.IBooleanForm, qx.ui.form.IModel],
+  implement : [qx.ui.form.IExecutable, qx.ui.form.IBooleanForm, qx.ui.form.IModel, qx.ui.form.IField],
   include : [qx.ui.form.MModelProperty],
 
 

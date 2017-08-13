@@ -31,6 +31,7 @@ qx.Class.define("qx.ui.form.AbstractField",
   extend : qx.ui.core.Widget,
   implement : [
     qx.ui.form.IStringForm,
+    qx.ui.form.IField,
     qx.ui.form.IForm
   ],
   include : [

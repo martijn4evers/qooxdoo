@@ -46,6 +46,7 @@ qx.Class.define("qx.ui.form.DateField",
   ],
   implement : [
     qx.ui.form.IForm,
+    qx.ui.form.IField,
     qx.ui.form.IDateForm
   ],
 

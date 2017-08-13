@@ -60,6 +60,7 @@ qx.Class.define("qx.ui.form.Spinner",
   implement : [
     qx.ui.form.INumberForm,
     qx.ui.form.IRange,
+    qx.ui.form.IField,
     qx.ui.form.IForm
   ],
   include : [

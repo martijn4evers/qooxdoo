@@ -19,6 +19,9 @@
 /**
  * Field interface.
  *
+ * This interface allows any value to be set as long as the following constraint
+ * is met: any value returned by {@link getValue} can be set by {@link setValue}.
+ *
  * This specifies the interface for handling the model value of a field.
  * The model value is always in a consistent state (see duration example), and
  * should only handle model values of a type that correctly represents the
