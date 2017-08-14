@@ -44,7 +44,7 @@ qx.Class.define("qx.test.data.controller.FormWithArrayAndModel",
       // imagine me being a table like widget containing two columns (e.g. an miniature todo-list)
       qx.Class.define("qx.test.data.controller.fixture.ArrayField", {
         extend : qx.ui.core.Widget,
-        implement : [ qx.ui.form.IArrayForm, qx.ui.form.IForm, qx.ui.form.IField ],
+        implement : [ qx.ui.form.IArrayForm, qx.ui.form.IForm ],
         include : [ qx.ui.form.MForm ],
 
         events : {
@@ -76,7 +76,7 @@ qx.Class.define("qx.test.data.controller.FormWithArrayAndModel",
       // imagine me being a multi-field widget (e.g. address form embedded in user form)
       qx.Class.define("qx.test.data.controller.fixture.ModelField", {
         extend : qx.data.controller.Form,
-        implement : [ qx.ui.form.IArrayForm, qx.ui.form.IForm, qx.ui.form.IField ],
+        implement : [ qx.ui.form.IArrayForm, qx.ui.form.IForm ],
         include : [ qx.ui.form.MForm ],
 
         events : {
