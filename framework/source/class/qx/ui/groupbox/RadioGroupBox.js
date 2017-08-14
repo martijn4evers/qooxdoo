@@ -30,7 +30,6 @@ qx.Class.define("qx.ui.groupbox.RadioGroupBox",
     qx.ui.form.IRadioItem,
     qx.ui.form.IExecutable,
     qx.ui.form.IBooleanForm,
-    qx.ui.form.IField,
     qx.ui.form.IModel
   ],
   include : [qx.ui.form.MModelProperty],

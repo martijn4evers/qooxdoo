@@ -68,7 +68,6 @@ qx.Class.define("qx.ui.control.DateChooser",
   implement : [
     qx.ui.form.IExecutable,
     qx.ui.form.IForm,
-    qx.ui.form.IField,
     qx.ui.form.IDateForm
   ],
 

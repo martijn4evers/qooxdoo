@@ -26,7 +26,7 @@
 qx.Class.define("qx.ui.menu.CheckBox",
 {
   extend : qx.ui.menu.AbstractButton,
-  implement : [ qx.ui.form.IBooleanForm, qx.ui.form.IField ],
+  implement : [ qx.ui.form.IBooleanForm ],
 
 
 
