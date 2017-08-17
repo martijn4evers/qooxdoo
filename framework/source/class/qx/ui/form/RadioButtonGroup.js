@@ -59,10 +59,7 @@ qx.Class.define("qx.ui.form.RadioButtonGroup",
     this.__radioGroup = new qx.ui.form.RadioGroup();
 
     // attach the listener
-    this.__radioGroup.addListener("changeSelection", function(e) {
-      this.fireDataEvent("changeValue", e.getData(), e.getOldData());
-      this.fireDataEvent("changeSelection", e.getData(), e.getOldData());
-    }, this);
+    this.__radioGroup.addListener("changeSelection", this._onChangeSelection, this);
   },
 
 
@@ -319,12 +316,24 @@ qx.Class.define("qx.ui.form.RadioButtonGroup",
      */
     resetValue : function() {
       this.__radioGroup.resetValue();
+    },
+
+
+    /**
+     * Called on {@link qx.ui.form.RadioGroup} selection change event.
+     *
+     * @param event {qx.event.type.Data} Event containing the {@link qx.ui.form.RadioGroup} selection data.
+     */
+    _onChangeSelection : function(event) {
+      this.fireDataEvent("changeValue", event.getData(), event.getOldData());
+      this.fireDataEvent("changeSelection", event.getData(), event.getOldData());
     }
   },
 
 
   destruct : function()
   {
+    this.__radioGroup.removeListener("changeSelection", this._onChangeSelection, this);
     this._disposeObjects("__radioGroup");
   }
 });
