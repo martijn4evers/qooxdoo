@@ -435,10 +435,6 @@ qx.Class.define("qx.event.Manager",
      */
     addListener : function(target, type, listener, self, capture)
     {
-      if ('undefined' === typeof capture) {
-        capture = false;
-      }
-
       if (qx.core.Environment.get("qx.debug"))
       {
         var msg = "Failed to add event listener for type '"+ type +"'" +
@@ -447,7 +443,10 @@ qx.Class.define("qx.event.Manager",
         qx.core.Assert.assertObject(target, msg + "Invalid Target.");
         qx.core.Assert.assertString(type, msg + "Invalid event type.");
         qx.core.Assert.assertFunctionOrAsyncFunction(listener, msg + "Invalid callback function");
-        qx.core.Assert.assertBoolean(capture, "Invalid capture flag.");
+
+        if (capture !== undefined) {
+          qx.core.Assert.assertBoolean(capture, "Invalid capture flag.");
+        }
       }
 
       var targetKey = target.$$hash || qx.core.ObjectRegistry.toHashCode(target);
@@ -626,10 +625,6 @@ qx.Class.define("qx.event.Manager",
      */
     removeListener : function(target, type, listener, self, capture)
     {
-      if ('undefined' === typeof capture) {
-        capture = false;
-      }
-
       if (qx.core.Environment.get("qx.debug"))
       {
         var msg = "Failed to remove event listener for type '" + type + "'" +
@@ -638,10 +633,13 @@ qx.Class.define("qx.event.Manager",
         qx.core.Assert.assertObject(target, msg + "Invalid Target.");
         qx.core.Assert.assertString(type, msg + "Invalid event type.");
         qx.core.Assert.assertFunction(listener, msg + "Invalid callback function");
-        qx.core.Assert.assertBoolean(capture, "Invalid capture flag.");
 
         if (self !== undefined) {
           qx.core.Assert.assertObject(self, "Invalid context for callback.");
+        }
+
+        if (capture !== undefined) {
+          qx.core.Assert.assertBoolean(capture, "Invalid capture flag.");
         }
       }
 

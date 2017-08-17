@@ -113,7 +113,7 @@ qx.Class.define("qx.event.Registration",
      *         usually falls back to a default, which is the target
      *         by convention. Note this is not a strict requirement, i.e.
      *         custom dispatchers can follow a different strategy.
-     * @param capture {Boolean ? false} Whether to attach the event to the
+     * @param capture {Boolean} Whether to attach the event to the
      *         capturing phase or the bubbling phase of the event. The default is
      *         to attach the event handler to the bubbling phase.
      * @return {var} An opaque id, which can be used to remove the event listener
@@ -135,7 +135,7 @@ qx.Class.define("qx.event.Registration",
      * @param listener {Function} The pointer to the event listener
      * @param self {Object ? null} Reference to the 'this' variable inside
      *         the event listener.
-     * @param capture {Boolean ? false} Whether to remove the event listener of
+     * @param capture {Boolean} Whether to remove the event listener of
      *    the bubbling or of the capturing phase.
      * @return {Boolean} Whether the event was removed. Return <code>false</code> if
      *    the event was already removed before.
