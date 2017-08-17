@@ -98,7 +98,7 @@ qx.Mixin.define("qx.core.MEvent",
      * @param type {String} name of the event type
      * @param listener {Function} event callback function
      * @param self {Object ? null} reference to the 'this' variable inside the callback
-     * @param capture {Boolean} Whether to remove the event listener of
+     * @param capture {Boolean ? false} Whether to remove the event listener of
      *   the bubbling or of the capturing phase.
      * @return {Boolean} Whether the event was removed successfully (has existed)
      */
