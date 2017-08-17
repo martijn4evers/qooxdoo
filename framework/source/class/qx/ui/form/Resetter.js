@@ -81,7 +81,7 @@ qx.Class.define("qx.ui.form.Resetter",
       for (var i = 0; i < this.__items.length; i++) {
         dataEntry = this.__items[i];
         e = dataEntry.item.setValue(dataEntry.init);
-        if (e instanceof Error) {
+        if (e && e instanceof Error) {
           errors.push(e);
         }
       }
