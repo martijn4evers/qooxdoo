@@ -293,18 +293,22 @@ qx.Class.define("qx.ui.form.RadioButtonGroup",
 
 
     /**
-     * Set given radio item as checked.
+     * Select given value.
      *
-     * @param item {null|qx.ui.form.IRadioItem} Item to set as selected value.
-     * @returns {null|TypeError} The status of this operation.
+     * @param item {null|var} Item to set as selected value.
+     * @return {null|Error} The status of this operation.
      */
     setValue : function(item) {
-      return this.__radioGroup.setValue(item);
+      if (item instanceof qx.ui.form.IRadioItem) {
+        return this.__radioGroup.setValue(item);
+      } else {
+        return new Error("can not select radio item from value");
+      }
     },
 
 
     /**
-     * @returns {null|qx.ui.form.IRadioItem} The checked radio item or null if there is none.
+     * @return {null|var} Returns the selected value.
      */
     getValue : function() {
       return this.__radioGroup.getValue();
