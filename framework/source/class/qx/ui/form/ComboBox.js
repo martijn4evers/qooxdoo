@@ -33,7 +33,7 @@
 qx.Class.define("qx.ui.form.ComboBox",
 {
   extend  : qx.ui.form.AbstractSelectBox,
-  implement : [ qx.ui.form.IStringForm ],
+  implement : [qx.ui.form.IStringForm],
 
 
 

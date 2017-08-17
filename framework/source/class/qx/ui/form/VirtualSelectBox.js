@@ -49,7 +49,7 @@ qx.Class.define("qx.ui.form.VirtualSelectBox",
     this.__searchTimer = new qx.event.Timer(500);
     this.__searchTimer.addListener("interval", this.__preselect, this);
 
-    this.getSelection().addListener("change", this.__updateValue, this);
+    this.getSelection().addListener("change", this._updateSelectionValue, this);
   },
 
 
@@ -437,10 +437,11 @@ qx.Class.define("qx.ui.form.VirtualSelectBox",
 
 
     /**
+     * Called when selection changes.
+     *
      * @param event {qx.event.type.Data} {@link qx.data.Array} change event.
-     * @private
      */
-    __updateValue : function(event) {
+    _updateSelectionValue : function(event) {
       var d = event.getData();
       var old = (d.removed.length ? d.removed[0] : null);
       this.fireDataEvent("changeValue", d.added[0], old);
@@ -452,7 +453,7 @@ qx.Class.define("qx.ui.form.VirtualSelectBox",
   {
     this._removeBindings();
 
-    this.getSelection().removeListener("change", this.__updateValue, this);
+    this.getSelection().removeListener("change", this._updateSelectionValue, this);
 
     this.__searchTimer.removeListener("interval", this.__preselect, this);
     this.__searchTimer.dispose();
