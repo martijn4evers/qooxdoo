@@ -73,13 +73,23 @@ qx.Class.define("qx.ui.form.Resetter",
     /**
      * Resets all added fields to their initial value. The initial value
      * is the value in the widget during the {@link #add}.
+     *
+     * @return {null|Error} Returns an error when some fields could not be reset.
      */
     reset: function() {
-      // reset all form items
-      var dataEntry;
+      var dataEntry, e, errors = [];
       for (var i = 0; i < this.__items.length; i++) {
         dataEntry = this.__items[i];
-        dataEntry.item.setValue(dataEntry.init);
+        e = dataEntry.item.setValue(dataEntry.init);
+        if (e instanceof Error) {
+          errors.push(e);
+        }
+      }
+
+      if (errors.length) {
+        return new Error(errors.join(', '));
+      } else {
+        return null;
       }
     },
 
@@ -90,14 +100,14 @@ qx.Class.define("qx.ui.form.Resetter",
      *
      * @param field {qx.ui.form.IField} The field, which should be reset.
      * @throws {TypeError} When given argument is not a field.
+     * @return {null|Error} Returns an error when the field value could not be set.
      */
     resetItem : function(field) {
       this.__typeCheck(field);
       for (var i = 0; i < this.__items.length; i++) {
         var dataEntry = this.__items[i];
         if (dataEntry.item === field) {
-          field.setValue(dataEntry.init);
-          return;
+          return field.setValue(dataEntry.init);
         }
       }
 
